@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 //adição de controllers
 builder.Services.AddControllers();
 
+//adição do swagger
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo
@@ -18,10 +19,11 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+//adição do serviço do banco de dados
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlite("Data source=data.db");
-}); //adição do serviço do banco de dados
+});
 
 builder.Services.AddScoped<IAlunoService, AlunoService>();
 
@@ -29,6 +31,7 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
+    //utilização do swagger em ambiente de desenvolvimento
     app.UseSwagger();
     app.UseSwaggerUI(options =>
     {
