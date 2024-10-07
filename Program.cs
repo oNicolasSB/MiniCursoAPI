@@ -1,4 +1,8 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using MiniCursoAPI.Data;
+using MiniCursoAPI.Interfaces;
+using MiniCursoAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +17,13 @@ builder.Services.AddSwaggerGen(options =>
         Version = "v1"
     });
 });
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    options.UseSqlite("Data source=data.db");
+}); //adição do serviço do banco de dados
+
+builder.Services.AddScoped<IAlunoService, AlunoService>();
 
 var app = builder.Build();
 
