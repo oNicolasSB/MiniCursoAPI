@@ -1,0 +1,7 @@
+obj/
+.vscode/
+.vs/
+bin/
+appsettings.Development.json
+Certificates/*
+data.db**
